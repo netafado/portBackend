@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 //cors
-const cors = require('./config/cors')
+const cors = require('./config/cors');
 app.use(cors.cors);
 // routers
 const userRoutes = require( './routes/userRoute' );
@@ -36,5 +36,5 @@ app.use((err, req, res, next)=>{
 });
 
 app.listen(process.env.PORT || process.env._PORT, ()=>{
-    console.log( `Serer runing on port ${process.env._PORT}` )
+    console.log( `Serer runing on port ${process.env._PORT|| process.env.PORT}` )
 })
