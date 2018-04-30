@@ -11,6 +11,9 @@ const db = require('./config/db');
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+//cors
+const cors = require('./config/cors')
+app.use(cors.cors);
 // routers
 const userRoutes = require( './routes/userRoute' );
 app.use('/user', userRoutes);
