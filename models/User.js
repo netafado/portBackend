@@ -27,7 +27,7 @@ const userSchema = mongoose.Schema({
     token:{
 
     }
-});
+}, {timestamps:true});
 
 
 userSchema.methods.comparePassword = function(candidatePassword, cb){

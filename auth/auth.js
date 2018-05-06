@@ -8,6 +8,8 @@ exports.authorized = (req, res, next)=>{
     User.findByToken(token, (err, user)=>{
         if(err) return next(err)
         if(user){
+            // deixar o user para a proxima rota
+            req.user = user;
             next();
         }else{
             res.status(401);

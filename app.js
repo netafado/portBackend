@@ -16,7 +16,9 @@ const cors = require('./config/cors');
 app.use(cors.cors);
 // routers
 const userRoutes = require( './routes/userRoute' );
+const postRoutes = require('./routes/postRoute');
 app.use('/user', userRoutes);
+app.use('/blog', postRoutes);
 
 //404
 app.use((req, res, next)=>{
