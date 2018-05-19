@@ -51,11 +51,11 @@ exports.userlogIn = (req, res, next)=>{
                             return res.status(400).json({message:"Não autorizado", auth: false});
                         }
                         res.cookie('auth', user.token);
-                        return res.json({message: "User is log in the system: ", auth: isMatch} )
+                        return res.json({message: "User is log in the system: ", auth: true} )
                     })                   
                     
                 }else{
-                    return res.json({message: "Incorret pass", auth: isMatch} )
+                    return res.json({message: "Incorret pass", auth: false} )
                 }
             })           
         })
