@@ -4,7 +4,8 @@ const router = express.Router();
 const auth = require('../auth/auth')
 
 // GET
-router.get('/', userController.getUser)
+router.get('/', auth.authorized, userController.getUser)
+router.get('/auth',auth.authorized ,userController.userAuth)
 
 // POST
 router.post('/', userController.insertUser);

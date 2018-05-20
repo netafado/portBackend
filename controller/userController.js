@@ -6,6 +6,18 @@ exports.getUser = (req, res, next)=>{
     res.send('userGet');
 }
 
+exports.userAuth = (req, res, next)=>{
+    console.log(req.user)
+    return res.json(
+        {
+            name: req.user.name,
+            id: req.user._id,
+            email: req.user.email
+
+        }
+    )
+}
+
 exports.insertUser = (req, res, next)=>{
     let user =  new User(req.body);
     user.save()
@@ -41,17 +53,26 @@ exports.userlogIn = (req, res, next)=>{
     User.findOne({"email": email})
         .then((user)=>{
             if(!user)
-                return res.json({message: 'User not fount, outh failed', isAuth: false})    
+                return res.json({
+                    message: 'User not fount, outh failed', 
+                    isAuth: false,
+                })    
             user.comparePassword(pass, (err, isMatch)=>{
                 if(err) return next(err)
                 if(isMatch)
                 {
                     user.generateToken((err, user)=>{
                         if(err) {
-                            return res.status(400).json({message:"Não autorizado", auth: false});
+                            return res.status(400).json({message:"Não autorizado", 
+                                                        auth: false,
+                                                        error: true,
+                                                    });
                         }
-                        res.cookie('auth', user.token);
-                        return res.json({message: "User is log in the system: ", auth: true} )
+                        res.cookie('auth', user.token).json({
+                            auth: true,
+                            user: user,
+                            error: false
+                        })
                     })                   
                     
                 }else{
