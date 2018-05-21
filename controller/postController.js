@@ -1,6 +1,7 @@
 const Post = require('../models/Post');
 
 exports.insertPost= (req, res, next)=>{
+    console.log(req.body)
     let title = req.body.title;
     let content = req.body.content;
     let desc = req.body.desc;
@@ -14,9 +15,11 @@ exports.insertPost= (req, res, next)=>{
     })
 
     post.save()
-        .then((err, post)=>{
-            if(err) (err)=> next(err);
-            res.send({message: "post Criado com sucesso"})
+        .then((post)=>{
+            res.json({message: "post Criado com sucesso", post})
+        })
+        .catch(err => {
+            res.json({message: "erro", err})
         })
 }
 

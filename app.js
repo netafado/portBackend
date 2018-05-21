@@ -29,10 +29,15 @@ app.use((req, res, next)=>{
 
 //middleware error handler
 app.use((err, req, res, next)=>{
+    console.log(err.status)
     if(err.status === 404)
     {
         res.send('Not found')
-    }else{
+    }
+    else if(err.status === 401){
+        res.json({auth: false})
+    }
+    else{
         res.send("ultima rota " +  err.message)
     }
 });

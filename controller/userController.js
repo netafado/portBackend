@@ -10,6 +10,7 @@ exports.userAuth = (req, res, next)=>{
     console.log(req.user)
     return res.json(
         {
+            isAuth: true,
             name: req.user.name,
             id: req.user._id,
             email: req.user.email
@@ -68,7 +69,8 @@ exports.userlogIn = (req, res, next)=>{
                                                         error: true,
                                                     });
                         }
-                        res.cookie('auth', user.token).json({
+                        console.log(user.token)
+                        return res.cookie('auth', user.token).json({
                             auth: true,
                             user: user,
                             error: false

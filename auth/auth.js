@@ -5,6 +5,7 @@ const User = require('../models/User');
 // veridica se o token bate o usuario 
 exports.authorized = (req, res, next)=>{
     let token = req.cookies.auth;
+
     User.findByToken(token, (err, user)=>{
         if(err) return next(err)
         if(user){
@@ -13,7 +14,9 @@ exports.authorized = (req, res, next)=>{
             next();
         }else{
             res.status(401);
-            next(new Error("not authorized"));
+            let err = new Error("not authorized");
+            err.status = 401
+            next(err);
         }        
     })    
 }
