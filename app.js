@@ -8,8 +8,12 @@ require('dotenv').config();
 const db = require('./config/db');
 
 // convert to json
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
 app.use(cookieParser());
+
+app.use(express.static( './public' ))
 
 //cors
 const cors = require('./config/cors');
@@ -29,7 +33,6 @@ app.use((req, res, next)=>{
 
 //middleware error handler
 app.use((err, req, res, next)=>{
-    console.log(err.status)
     if(err.status === 404)
     {
         res.send('Not found')

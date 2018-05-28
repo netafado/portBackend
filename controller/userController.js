@@ -7,7 +7,6 @@ exports.getUser = (req, res, next)=>{
 }
 
 exports.userAuth = (req, res, next)=>{
-    console.log(req.user)
     return res.json(
         {
             isAuth: true,

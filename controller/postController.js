@@ -1,22 +1,25 @@
 const Post = require('../models/Post');
 
+
+
 exports.insertPost= (req, res, next)=>{
-    console.log(req.body)
     let title = req.body.title;
     let content = req.body.content;
     let desc = req.body.desc;
     let author = req.user.id;
-    
+    console.log(req.file)
+    console.log(req.body)
     let post = new Post({
         title,
         content,
         desc,
-        author
+        author,
+        img: req.file.filename
     })
 
     post.save()
         .then((post)=>{
-            res.json({message: "post Criado com sucesso", post})
+            res.json({message: "post Criado com sucesso", data: post})
         })
         .catch(err => {
             res.json({message: "erro", err})
