@@ -2,6 +2,7 @@ const express    =  require('express');
 const app        =  express();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 require('dotenv').config();
 
 //db
@@ -16,8 +17,18 @@ app.use(cookieParser());
 app.use(express.static( './public' ));
 
 //cors
-const cors = require('./config/cors');
-app.use(cors.cors);
+var whitelist = ['http://localhost:3000', 'http://isaiasfrancisco.com.br', 'https://isaiasfrancisco.com.br', /isaiasfrancisco\.com.br$/]
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
+  credentials: true
+}
+app.use(cors(corsOptions));
 // routers
 const userRoutes = require( './routes/userRoute' );
 const postRoutes = require('./routes/postRoute');
@@ -46,5 +57,5 @@ app.use((err, req, res, next)=>{
 });
 
 app.listen(process.env.PORT || process.env._PORT, ()=>{
-    console.log( `Serer runing on port ${process.env._PORT|| process.env.PORT}` )
+    console.log( `server runing on port ${process.env._PORT|| process.env.PORT}` )
 })
