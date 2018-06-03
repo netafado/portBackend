@@ -5,7 +5,6 @@ const auth = require('../auth/auth')
 const multer = require('multer');
 
 
-
 var storage =  multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, './public/upload')
@@ -24,7 +23,7 @@ var storage =  multer.diskStorage({
 router.get('/', controller.getAllPost );
 router.get('/:id', controller.getOnePost );
 
-router.post('/', auth.authorized, upload.single('img'), controller.insertPost );
+router.post('/', auth.authorized, upload.fields([{ name: 'img', maxCount: 1 }, { name: 'thumb', maxCount: 1 }]), controller.insertPost );
 
 
 

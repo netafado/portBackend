@@ -23,6 +23,13 @@ const PostSchema = mongoose.Schema({
     },
     img:{
         type: String
+    },
+    thumb: {
+        type: String
+    },
+    type:{
+        type: String,
+        default: 'post'
     }
 }, {timestamps:true})
 

@@ -6,15 +6,17 @@ exports.insertPost= (req, res, next)=>{
     let title = req.body.title;
     let content = req.body.content;
     let desc = req.body.desc;
+    let type = req.body.type;
     let author = req.user.id;
-    console.log(req.file)
-    console.log(req.body)
+    console.log(req.files);
     let post = new Post({
         title,
         content,
         desc,
         author,
-        img: req.file.filename
+        type,
+        img: req.files['img'][0].filename,
+        thumb: req.files['thumb'][0].filename,
     })
 
     post.save()
