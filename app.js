@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 
 app.use(cookieParser());
 
-app.use(express.static( './public' ))
+app.use(express.static( './public' ));
 
 //cors
 const cors = require('./config/cors');
