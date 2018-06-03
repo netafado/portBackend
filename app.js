@@ -17,9 +17,10 @@ app.use(cookieParser());
 app.use(express.static( './public' ));
 
 //cors
-var whitelist = ['http://localhost:3000', 'http://www.isaiasfrancisco.com.br', 'https://www.isaiasfrancisco.com.br']
+var whitelist = ['http://localhost:3000', 'http://www.isaiasfrancisco.com.br', 'https://www.isaiasfrancisco.com.br', 'http://isaiasfrancisco.com.br', 'https://isaiasfrancisco.com.br']
 var corsOptions = {
   origin: function (origin, callback) {
+    console.log('teste');
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true)
     } else {
