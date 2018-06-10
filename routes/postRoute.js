@@ -24,7 +24,7 @@ router.get('/', controller.getAllPost );
 router.get('/:id', controller.getOnePost );
 
 router.post('/', auth.authorized, upload.fields([{ name: 'img', maxCount: 1 }, { name: 'thumb', maxCount: 1 }]), controller.insertPost );
-
+router.get('/user/posts/:id', auth.authorized, controller.getPostByUser);
 
 
 router.delete('/:id', auth.authorized, controller.deleteOnePost );

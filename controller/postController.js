@@ -1,14 +1,18 @@
+/**
+ * Controller para inserção, upadate e deletar posts 
+ * 
+ */
+
+
 const Post = require('../models/Post');
 
-
-
 exports.insertPost= (req, res, next)=>{
+    console.log(req.body);
     let title = req.body.title;
     let content = req.body.content;
     let desc = req.body.desc;
     let type = req.body.type;
     let author = req.user.id;
-    console.log(req.files);
     let post = new Post({
         title,
         content,
@@ -29,12 +33,29 @@ exports.insertPost= (req, res, next)=>{
 }
 
 exports.getAllPost = (req, res, next) =>{
-    let limit = req.query.limit;
-    Post.find()
+    let limit = parseInt(req.query.limit) || 4;
+    let type = req.query.type || null;
+    Post.find({type: type}).limit(limit)
         .then(posts =>{
             return res.json(posts);
         })
         .catch(err => next(err))
+}
+
+exports.getPostByUser = (req, res, next) =>{
+    const id = req.params.id;
+    if(!id){
+        return res.json({err: "Precisamos de um id"});
+    }
+
+    Post.find({author: id}).then((posts)=>{
+        console.log(posts);
+        return res.json(posts);
+    })
+    .catch((err)=>{
+        console.log(err);
+        next(err);
+    })
 }
 
 

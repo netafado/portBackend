@@ -54,7 +54,7 @@ exports.userlogIn = (req, res, next)=>{
         .then((user)=>{
             if(!user)
                 return res.json({
-                    message: 'User not fount, outh failed', 
+                    err: 'User not fount, outh failed', 
                     isAuth: false,
                 })    
             user.comparePassword(pass, (err, isMatch)=>{
@@ -77,7 +77,7 @@ exports.userlogIn = (req, res, next)=>{
                     })                   
                     
                 }else{
-                    return res.json({message: "Incorret pass", auth: false} )
+                    return res.json({err: "Incorret pass", auth: false} )
                 }
             })           
         })

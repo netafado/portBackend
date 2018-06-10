@@ -47,13 +47,16 @@ app.use((req, res, next)=>{
 app.use((err, req, res, next)=>{
     if(err.status === 404)
     {
-        res.send('Not found')
+        res.status(400);
+        return res.json({err: "não encontrado"})
     }
     else if(err.status === 401){
-        res.json({auth: false})
+        res.status(401);
+        return res.json({auth: false, err: "não autorizado"})
     }
     else{
-        res.send("ultima rota " +  err.message)
+        
+        res.send({ err :"ultima rota: " +  err.message} )
     }
 });
 
