@@ -68,6 +68,47 @@ exports.getOnePost = (req, res, next)=>{
         .catch(err=>next(err))
 }
 
+exports.findAndUpdate= (req, res, next)=>{
+    let postID = req.params.id;
+    let title = req.body.title;
+    let content = req.body.content;
+    let desc = req.body.desc;
+    let type = req.body.type;
+    console.log(req.files)
+    let update = {};
+    if(title)
+        update.title = title;
+
+    if(desc)
+        update.desc = desc;
+
+    if(content)
+        update.content = content;
+        
+    if(type)
+        update.type = type;
+
+    if(req.files['img'])
+        update.img = req.files['img'][0].filename; 
+
+    if(req.files['thumb'])
+        update.thumb = req.files['thumb'][0].filename
+
+
+    Post.findOneAndUpdate({_id: postID},update)
+        .then(post=>{
+            if(post){
+                return res.json({
+                    msg: "Post updated"
+                })
+            }
+        })
+        .catch(err=>{
+            return res.json({
+                err: 'Erro ao tentar fazer o update'
+            })
+        })
+}
 
 exports.deleteOnePost = (req, res, next)=>{
     let postId = req.params.id;
