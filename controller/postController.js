@@ -73,7 +73,7 @@ exports.findAndUpdate= (req, res, next)=>{
     let content = req.body.content;
     let desc = req.body.desc;
     let type = req.body.type;
-    console.log(req.files)
+    console.log(req.files);
     let update = {};
     if(title)
         update.title = title;

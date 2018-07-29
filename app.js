@@ -9,7 +9,7 @@ require('dotenv').config();
 const db = require('./config/db');
 
 // convert to json
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(cookieParser());
@@ -21,7 +21,7 @@ var whitelist = ['http://localhost:3000', 'http://www.isaiasfrancisco.com.br', '
 var corsOptions = {
   origin: function (origin, callback) {
     console.log('teste');
-    if (whitelist.indexOf(origin) !== -1) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
       callback(null, true)
     } else {
       callback(new Error('Not allowed by CORS'))
