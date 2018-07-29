@@ -47,7 +47,6 @@ exports.getPostByUser = (req, res, next) =>{
     if(!id){
         return res.json({err: "Precisamos de um id"});
     }
-
     Post.find({author: id}).then((posts)=>{
         console.log(posts);
         return res.json(posts);
@@ -92,8 +91,7 @@ exports.findAndUpdate= (req, res, next)=>{
         update.img = req.files['img'][0].filename; 
 
     if(req.files['thumb'])
-        update.thumb = req.files['thumb'][0].filename
-
+        update.thumb = req.files['thumb'][0].filename;
 
     Post.findOneAndUpdate({_id: postID},update)
         .then(post=>{
