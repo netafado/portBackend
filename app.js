@@ -33,8 +33,10 @@ app.use(cors(corsOptions));
 // routers
 const userRoutes = require( './routes/userRoute' );
 const postRoutes = require('./routes/postRoute');
+const mailRouter = require('./routes/mail');
 app.use('/user', userRoutes);
 app.use('/blog', postRoutes);
+app.use('/mail', mailRouter);
 
 //404
 app.use((req, res, next)=>{

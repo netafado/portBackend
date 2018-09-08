@@ -12,7 +12,6 @@ var storage =  multer.diskStorage({
     filename: function (req, file, cb) {
       // renomeia o arquivo para algo legivel
       let ext = file.mimetype.split('/')[1];
-      console.log(ext);
       let filenewName  = file.fieldname + '-' + Date.now() +  "." + ext;
       cb(null, filenewName);
     }
@@ -29,6 +28,5 @@ router.put('/user/post/:id', auth.authorized,upload.fields([{ name: 'img', maxCo
 
 
 router.delete('/:id', auth.authorized, controller.deleteOnePost );
-
 
 module.exports = router;

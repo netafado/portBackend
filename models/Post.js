@@ -8,6 +8,9 @@ const PostSchema = mongoose.Schema({
         trim: true,
         required: true
     },
+    order: {
+        type: Number,
+    },
     content:{
         type: String,
         trim: true,

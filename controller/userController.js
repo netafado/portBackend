@@ -13,7 +13,6 @@ exports.userAuth = (req, res, next)=>{
             name: req.user.name,
             id: req.user._id,
             email: req.user.email
-
         }
     )
 }

@@ -35,7 +35,7 @@ exports.insertPost= (req, res, next)=>{
 exports.getAllPost = (req, res, next) =>{
     let limit = parseInt(req.query.limit) || 4;
     let type = req.query.type || null;
-    Post.find({type: type}).limit(limit)
+    Post.find({type: type}).limit(limit).sort({order: 1})
         .then(posts =>{
             return res.json(posts);
         })
@@ -44,11 +44,10 @@ exports.getAllPost = (req, res, next) =>{
 
 exports.getPostByUser = (req, res, next) =>{
     const id = req.params.id;
-    if(!id){
+    if(!id){g
         return res.json({err: "Precisamos de um id"});
     }
     Post.find({author: id}).then((posts)=>{
-        console.log(posts);
         return res.json(posts);
     })
     .catch((err)=>{
