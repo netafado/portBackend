@@ -57,11 +57,24 @@ exports.getPostByUser = (req, res, next) =>{
 }
 
 
-exports.getOnePost = (req, res, next)=>{
+exports.getOnePost = async(req, res, next)=>{
     let postID = req.params.id;
+    let prevpost = await Post.findOne({_id: {$gt: postID}}).sort({_id: -1 }).limit(1)
+        .then(post => {
+            return post
+        });
+        let nextpost = await Post.findOne({_id: {$gt: postID}}).sort({_id: 1 }).limit(1)
+        .then(post => {
+            return post
+        });
+    console.log(prevpost);
     Post.findOne({_id: postID})
-        .then(post =>{
-            return res.json(post)
+        .then(current =>{
+            return res.json({
+                current,
+                prevpost,
+                nextpost
+            })
         })
         .catch(err=>next(err))
 }
