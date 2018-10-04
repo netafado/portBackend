@@ -34,8 +34,10 @@ app.use(cors(corsOptions));
 const userRoutes = require( './routes/userRoute' );
 const postRoutes = require('./routes/postRoute');
 const mailRouter = require('./routes/mail');
+const financa = require('./routes/financa');
 app.use('/user', userRoutes);
 app.use('/blog', postRoutes);
+app.use('/financa', financa);
 app.use('/mail', mailRouter);
 
 //404
