@@ -44,7 +44,7 @@ exports.getAllPost = (req, res, next) =>{
 
 exports.getPostByUser = (req, res, next) =>{
     const id = req.params.id;
-    if(!id){g
+    if(!id){
         return res.json({err: "Precisamos de um id"});
     }
     Post.find({author: id}).then((posts)=>{
