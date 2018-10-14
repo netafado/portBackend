@@ -20,7 +20,6 @@ app.use(express.static( './public' ));
 var whitelist = ['http://localhost:3000', 'http://www.isaiasfrancisco.com.br', 'https://www.isaiasfrancisco.com.br', 'http://isaiasfrancisco.com.br', 'https://isaiasfrancisco.com.br']
 var corsOptions = {
   origin: function (origin, callback) {
-    console.log('teste');
     if (whitelist.indexOf(origin) !== -1 || !origin) {
       callback(null, true)
     } else {
@@ -29,15 +28,21 @@ var corsOptions = {
   },
   credentials: true
 }
+
+//var corsOptions = {
+//    origin:"*" ,
+//    credentials: true
+//  }
 app.use(cors(corsOptions));
 // routers
 const userRoutes = require( './routes/userRoute' );
 const postRoutes = require('./routes/postRoute');
 const mailRouter = require('./routes/mail');
 const financa = require('./routes/financa');
+app.use('/financa', financa);
 app.use('/user', userRoutes);
 app.use('/blog', postRoutes);
-app.use('/financa', financa);
+
 app.use('/mail', mailRouter);
 
 //404

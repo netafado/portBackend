@@ -15,6 +15,14 @@ const Financas = new schema({
         type: Date,
         required: true,
     },
+    initialValue:{
+        type: Number,
+        default: 0
+    },
+    valueGoal:{
+        type: Number,
+        required: true
+    },
     deadline:{
         type: Date,
         required: true,
@@ -23,11 +31,22 @@ const Financas = new schema({
         type: String,
         default: "R$"
     },
-    value:[{
+    values:[{
         value:{
-            type: Number,            
+            type: Number,
+            required: "Um valor é necessario"            
+        },
+        desc: {
+            type: String,
+            default: 'nenhum'
+
+        },
+        createdAt:{
+            type: Date,
+            default: Date.now()
         }
-    }, {timestamps:true}]
+    }
+    ,]
 
 
 }, {timestamps:true} )
