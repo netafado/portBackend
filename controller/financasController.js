@@ -4,10 +4,9 @@ exports.insertValues = async (req, res, next) =>{
     const id    =  req.body.idFin;
     const value =  req.body.value;
     const desc =  req.body.desc;
-    const type  = 
     await Financa.findOne({_id: id})
             .then(fin => {
-                fin.values.push({value});
+                fin.values.push({value, desc});
                 console.log(fin._id);
                 fin.save();
                 res.json({fin});
