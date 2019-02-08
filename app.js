@@ -29,12 +29,12 @@ app.use((req, res, next)=>{
 app.use((err, req, res, next)=>{
     if(err.status === 404)
     {
-        res.send('Not found')
+        res.json({message: 'Not found'})
     }else{
         res.send("ultima rota " +  err.message)
     }
 });
 
-app.listen(process.env.PORT || process.env._PORT, ()=>{
-    console.log( `Serer runing on port ${process.env._PORT|| process.env.PORT}` )
+app.listen(process.env.PORT, ()=>{
+    console.log( `Serer runing on port}` )
 })
